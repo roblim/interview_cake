@@ -17,7 +17,16 @@ get_max_profit(stock_prices_yesterday)
 No "shorting"—you must buy before you sell. You may not buy and sell in the same time step (at least 1 minute must pass).
 =end
 
+# O(n^2)
 def max_profit(stock_prices)
-
-  
+  result = 0
+  stock_prices.each_with_index do |price, idx|
+    next_idx = idx + 1
+    while next_idx < stock_prices.length
+      profit = stock_prices[next_idx] - price
+      result = profit if profit > result 
+      next_idx += 1
+    end
+  end
+  result
 end
